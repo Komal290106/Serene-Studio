@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";  // ✅ ENABLE AUTH
-
+import ScrollToTop from "./components/ScrollToTop"; 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -31,6 +31,7 @@ function App() {
     <AuthProvider>     {/* ✅ Auth wraps entire APP */}
       <CartProvider>
         <Router>
+          <ScrollToTop /> 
           <Navbar />
 
           <Routes>

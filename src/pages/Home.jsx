@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import './Home.css';
 import bgImage from '../assets/images/bg1.jpg';
 import { useCart } from '../context/CartContext';
@@ -159,10 +160,10 @@ const Home = () => {
             </p>
 
             <div className="hero-cta">
-              <a href="/collections" className="cta-btn primary">
+              <Link to="/collections" className="cta-btn primary">
                 <span className="btn-text">Explore Collection</span>
                 <span className="btn-hover"></span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -230,9 +231,9 @@ const Home = () => {
         </div>
         
         <div className="view-all">
-          <a href="/collections" className="view-all-link">
+          <Link to="/collections" className="view-all-link">
             View All Collections <i className="fas fa-arrow-right"></i>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -273,10 +274,10 @@ const Home = () => {
               </li>
             </ul>
 
-            <a href="/about" className="cta-btn outline">
+            <Link to="/about" className="cta-btn outline">
               <span>Our Story</span>
               <i className="fas fa-arrow-right"></i>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -377,9 +378,9 @@ const Home = () => {
           </div>
           
           <div className="editorial-footer">
-            <a href="/journal" className="view-all-btn">
+            <Link to="/journal" className="view-all-btn">
               View All Articles <i className="fas fa-arrow-right"></i>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

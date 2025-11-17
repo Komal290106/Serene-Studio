@@ -202,10 +202,10 @@ const Collections = () => {
               <h3 className="moodboard-quote" style={{color: 'white'}}>
                 Every collection is a story.<br />Every accessory, a chapter.
               </h3>
-              <a href="/handbags" className="moodboard-btn">
+              <Link to="/products/handbags" className="moodboard-btn">
                 <span style={{color: 'white'}}>Shop the Look</span>
                 <i className="fas fa-arrow-right" style={{color: 'white'}}></i>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
