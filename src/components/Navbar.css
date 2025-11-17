@@ -1,0 +1,547 @@
+/* ================ ROOT VARIABLES ================ */
+:root {
+  --bg-light: #F9F5F0;
+  --bg-beige: #F0E6D6;
+  --text-dark: #2A2118;
+  --text-light: #5C5349;
+  --gold-accent: #C4A76A;
+  --border-light: #E0D5C5;
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --elevated-shadow: 0 8px 24px rgba(42, 33, 24, 0.08);
+}
+
+/* ================ NAVBAR BASE ================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.2rem 0;
+  z-index: 1000;
+  transition: var(--transition);
+  background: transparent;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.navbar.scrolled {
+  background: rgba(249, 245, 240, 0.97);
+  box-shadow: var(--elevated-shadow);
+  padding: 0.7rem 0;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+}
+
+/* ================ LOGO ================ */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1001;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.logo .serif-font {
+  font-family: 'Georgia', serif;
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  background: linear-gradient(to right, var(--text-dark), var(--gold-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+}
+
+.navbar.scrolled .logo .serif-font {
+  font-size: 1.9rem;
+}
+
+.gold-line {
+  height: 2px;
+  width: 30px;
+  background: var(--gold-accent);
+  margin-top: 5px;
+  transition: var(--transition);
+}
+
+.navbar.scrolled .gold-line {
+  width: 25px;
+}
+
+/* ================ NAVIGATION LINKS ================ */
+.navbar nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar nav li {
+  position: relative;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+}
+
+.nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 0;
+  color: var(--text-dark);
+  opacity: 0.85;
+  transition: var(--transition);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: var(--gold-accent);
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
+  transition: var(--transition);
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+/* ================ DROPDOWN MENU ================ */
+.dropdown-arrow {
+  font-size: 0.75rem;
+  transition: var(--transition);
+}
+
+.dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+  color: var(--gold-accent);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(249, 245, 240, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 6px;
+  box-shadow: var(--elevated-shadow);
+  border: 1px solid var(--border-light);
+  min-width: 220px;
+  padding: 1.2rem 0;
+  margin-top: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  z-index: 1002;
+}
+
+/* Show dropdown on hover or when open */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu.dropdown-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.8rem 1.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+  transition: var(--transition);
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  opacity: 1;
+  color: var(--gold-accent);
+  background: rgba(196, 167, 106, 0.05);
+  padding-left: 2.2rem;
+}
+
+/* ================ ICON BUTTONS ================ */
+.nav-icons {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.icon-btn {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+  transition: var(--transition);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  opacity: 1;
+  color: var(--gold-accent);
+  transform: translateY(-1px);
+}
+
+/* Badge for cart/wishlist count */
+.icon-wrapper {
+  position: relative;
+}
+
+.icon-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--gold-accent);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border: 2px solid var(--bg-light);
+}
+
+/* ================ ACCOUNT DROPDOWN ================ */
+.account-dropdown {
+  position: relative;
+}
+
+.account-dropdown .dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(249, 245, 240, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 6px;
+  box-shadow: var(--elevated-shadow);
+  border: 1px solid var(--border-light);
+  min-width: 180px;
+  padding: 0.8rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  z-index: 1002;
+}
+
+.account-dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.account-dropdown .dropdown-content a {
+  display: block;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.account-dropdown .dropdown-content a:hover {
+  background: rgba(196, 167, 106, 0.08);
+  color: var(--gold-accent);
+  padding-left: 1.5rem;
+}
+
+/* ================ MOBILE MENU ================ */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  font-size: 1.6rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: var(--transition);
+  padding: 0.5rem;
+}
+
+.mobile-menu-toggle:hover {
+  color: var(--gold-accent);
+}
+
+/* Mobile Styles */
+@media (max-width: 992px) {
+  .navbar-container {
+    padding: 0 1.5rem;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .navbar nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-light);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar nav.nav-open {
+    transform: translateX(0);
+  }
+
+  .navbar nav ul {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+  }
+
+  /* Mobile dropdown styles */
+  .dropdown-menu {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+    padding: 1rem 0;
+    margin-top: 0;
+  }
+
+  .dropdown-menu.dropdown-open {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    justify-content: center;
+  }
+
+  .dropdown-item:hover {
+    padding-left: 2rem;
+  }
+
+  /* Adjust icons for mobile */
+  .nav-icons {
+    gap: 1.2rem;
+  }
+
+  .icon-btn {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .logo .serif-font {
+    font-size: 1.8rem;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+  }
+
+  .nav-icons {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1rem 0;
+  }
+
+  .navbar.scrolled {
+    padding: 0.5rem 0;
+  }
+
+  .logo .serif-font {
+    font-size: 1.6rem;
+  }
+
+  .nav-icons {
+    gap: 0.8rem;
+  }
+
+  .icon-btn {
+    font-size: 1rem;
+    padding: 0.3rem;
+  }
+}
+
+/* -------- Account dropdown improved (keep it open while interacting) -------- */
+.account-dropdown {
+  position: relative;
+}
+
+/* base hidden state */
+.account-dropdown .dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(249, 245, 240, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 8px;
+  box-shadow: var(--elevated-shadow);
+  border: 1px solid var(--border-light);
+  min-width: 220px;
+  padding: 0.6rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: var(--transition);
+  z-index: 1005;
+  pointer-events: none; /* avoids accidental hover when hidden */
+}
+
+/* visible state when open */
+.account-dropdown.open .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto; /* allow clicks while visible */
+}
+
+/* content items */
+.account-dropdown .dropdown-content a,
+.account-dropdown .dropdown-content button,
+.account-dropdown .dropdown-content p {
+  display: block;
+  padding: 0.75rem 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* greeting */
+.account-dropdown .user-welcome {
+  padding: 0.9rem 1.2rem;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: linear-gradient(90deg, rgba(0,0,0,0.02), transparent);
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.95rem;
+}
+
+/* focused / hovered items */
+.account-dropdown .dropdown-content a:hover,
+.account-dropdown .dropdown-content button:hover {
+  background: rgba(196, 167, 106, 0.06);
+  color: var(--gold-accent);
+  padding-left: 1.6rem;
+}
+
+/* logout button styling */
+.logout-btn {
+  display: block;
+  margin: 0.6rem 1rem;
+  padding: 0.6rem 0.9rem;
+  background: transparent;
+  color: var(--text-dark);
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition);
+  width: calc(100% - 2rem);
+}
+
+.logout-btn:hover {
+  background: var(--gold-accent);
+  color: white;
+  border-color: var(--gold-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(196,167,106,0.12);
+}
+
+/* login / signup links — look like buttons */
+.account-dropdown .dropdown-content a.signup {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.account-dropdown .dropdown-content a.login {
+  color: var(--text-light);
+}
+
+/* make sure on small screens it still works */
+@media (max-width: 992px) {
+  .account-dropdown .dropdown-content {
+    right: 1rem;
+    left: 1rem;
+  }
+}

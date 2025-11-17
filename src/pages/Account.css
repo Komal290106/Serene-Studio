@@ -1,0 +1,140 @@
+:root{
+  --bg:#f9f3ea;
+  --card:rgba(255,255,255,0.96);
+  --muted:#8f826d;
+  --accent:#5a4634;
+  --accent-2:#c4a76a;
+  --border:rgba(210,195,170,0.36);
+  --shadow:0 12px 40px rgba(0,0,0,0.06);
+  --radius-lg:20px;
+}
+
+/* page offset to avoid fixed navbar collision */
+.account-container{
+  min-height:100vh;
+  padding:calc(72px + 2rem) 20px 3rem;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* layout: profile column + actions column */
+.account-wrapper{
+  width:100%;
+  max-width:1140px;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:32px;
+  align-items:start;
+}
+
+/* profile card */
+.profile-card{
+  background:var(--card);
+  padding:26px;
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.profile-top{ display:flex; gap:16px; align-items:center; }
+
+.profile-img{
+  width:96px; height:96px; border-radius:50%;
+  border:3px solid #d2c1a8; object-fit:cover;
+  background:linear-gradient(180deg,#fff,#faf7f2); padding:6px;
+}
+
+.profile-meta .name{ font-size:20px; margin:0 0 6px; color:#2c241b; }
+.email{ color:var(--muted); font-size:13px; margin:0 0 6px; }
+.joined{ font-size:13px; color:#a09078; margin:0; }
+
+/* profile buttons */
+.profile-actions{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:10px; font-weight:600; cursor:pointer;
+  border:1px solid transparent; transition:transform .22s ease,box-shadow .22s ease;
+  text-decoration:none; color:#2c241b; background:transparent;
+}
+
+.btn.primary{ background:var(--accent-2); color:white; }
+.btn.outlined{ background:transparent; border-color:var(--border); }
+.btn.danger{ background:var(--accent); color:white; }
+
+.btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+
+.logout-btn{ width:100%; }
+
+/* options grid - only working features */
+.options-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap:24px;
+  align-items:start;
+}
+
+/* option cards */
+.option-card{
+  background:var(--card);
+  border-radius:var(--radius-lg);
+  padding:26px 20px;
+  border:1px solid var(--border);
+  box-shadow:0 8px 30px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease;
+  color:#2c241b; position:relative;
+  min-height:170px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+
+.option-card.interactive{ cursor:pointer; border:1px solid rgba(180,160,120,0.2); }
+.option-card.interactive:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,0.08);
+  background:linear-gradient(180deg,#fff,#fbf8f1);
+}
+
+.option-top{ display:flex; justify-content:center; align-items:center; margin-bottom:10px; }
+
+.icon-wrap{
+  width:64px; height:64px; border-radius:50%;
+  background:linear-gradient(180deg, rgba(90,70,52,0.06), rgba(196,167,106,0.04));
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:26px; color:var(--accent); position:relative;
+}
+
+/* badge count */
+.badge{
+  position:absolute; top:-8px; right:-8px;
+  background:var(--accent); color:white; font-size:12px; font-weight:700;
+  padding:4px 7px; border-radius:999px; border:2px solid var(--card);
+}
+
+/* text */
+.option-card h3{ margin:0 0 8px; font-size:18px; letter-spacing:0.2px; }
+.option-card p.muted{ margin:0; color:var(--muted); font-size:13px; }
+
+@media (max-width:1024px){
+  .account-wrapper{ grid-template-columns:300px 1fr; gap:18px; max-width:980px; }
+  .option-card{ min-height:150px; }
+}
+
+@media (max-width:768px){
+  .account-wrapper{ grid-template-columns:1fr; gap:18px; padding:0; }
+  .profile-card{ order:0; width:100%; }
+  .options-grid{ grid-template-columns:repeat(2,minmax(160px,1fr)); }
+  .account-container{ padding-top:calc(72px + 1.2rem); }
+}
+
+@media (max-width:480px){
+  .options-grid{ grid-template-columns:1fr; }
+  .icon-wrap{ width:56px; height:56px; font-size:22px; }
+  .profile-img{ width:86px; height:86px; }
+}
