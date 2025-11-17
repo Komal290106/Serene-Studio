@@ -1,5 +1,6 @@
 import React from 'react';
 import './Journal.css';
+import { Link } from 'react-router-dom';
 
 const Journal = () => {
   return (
@@ -13,8 +14,8 @@ const Journal = () => {
             <h1 className="hero-title">Luxury Accessories to Elevate Your Look</h1>
             <p className="hero-description sans-font">Discover timeless fashion accessories that redefine elegance and style for every occasion. From statement jewelry to luxury handbags.</p>
             <div className="hero-actions">
-              <a href="#categories" className="btn-primary">Explore Collection</a>
-              <a href="#blogs" className="btn-secondary">Read Blog</a>
+              <Link to="#categories" className="btn-primary">Explore Collection</Link>
+              <Link to="#blogs" className="btn-secondary">Read Blog</Link>
             </div>
           </div>
         </div>
@@ -38,7 +39,7 @@ const Journal = () => {
                     <i className="fas fa-gem category-icon"></i>
                     <h3>Jewelry</h3>
                     <p className="sans-font">Trendy earrings, necklaces & bracelets that make a statement</p>
-                    <a href="jewelry.html" className="category-btn">View Collection</a>
+                    <Link to="/products/jewelry" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -52,7 +53,7 @@ const Journal = () => {
                     <i className="fas fa-heart category-icon"></i>
                     <h3>Fragrances</h3>
                     <p className="sans-font">Perfumes to complete your personality and leave lasting impressions</p>
-                    <a href="fragrances.html" className="category-btn">View Collection</a>
+                    <Link to="/products/fragrances" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -66,7 +67,7 @@ const Journal = () => {
                     <i className="fas fa-shopping-bag category-icon"></i>
                     <h3>Handbags</h3>
                     <p className="sans-font">Elegant handbags for every occasion and sophisticated lifestyle</p>
-                    <a href="handbags.html" className="category-btn">View Collection</a>
+                    <Link to="/products/handbags" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -80,7 +81,7 @@ const Journal = () => {
                     <i className="fas fa-belt category-icon"></i>
                     <h3>Belts</h3>
                     <p className="sans-font">Elevate your style with the timeless luxury of designer belts.</p>
-                    <a href="belts.html" className="category-btn">View Collection</a>
+                    <Link to="/products/belts" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -94,7 +95,7 @@ const Journal = () => {
                     <i className="fas fa-sunglasses category-icon"></i>
                     <h3>Sunglasses</h3>
                     <p className="sans-font">Experience the perfect blend of elegance and luxury with designer sunglasses.</p>
-                    <a href="sunglasses.html" className="category-btn">View Collection</a>
+                    <Link to="/products/sunglasses" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -108,7 +109,7 @@ const Journal = () => {
                     <i className="fas fa-scarf category-icon"></i>
                     <h3>Scarves</h3>
                     <p className="sans-font">Wrap yourself in the effortless luxury of designer scarves.</p>
-                    <a href="scarves.html" className="category-btn">View Collection</a>
+                    <Link to="/products/scarves" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
@@ -122,7 +123,7 @@ const Journal = () => {
                     <i className="fas fa-clock category-icon"></i>
                     <h3>Watches</h3>
                     <p className="sans-font">Luxury watches to make a statement and define timeless elegance</p>
-                    <a href="watches.html" className="category-btn">View Collection</a>
+                    <Link to="/products/watches" className="category-btn">View Collection</Link>
                   </div>
                 </div>
               </div>
