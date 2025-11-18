@@ -21,7 +21,8 @@ Built with **React**, **Vite**, **Tailwind CSS**, and **React Router**, the proj
 
 - **React**  
 - **Vite**  
-- **Tailwind CSS**  
+- **CSS**
+- **Javascript**
 - **React Router**
 
 
