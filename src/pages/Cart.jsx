@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Cart.css';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const Cart = () => {
@@ -250,10 +251,10 @@ const Cart = () => {
                     <span className="total-amount">₹{formatPrice(total)}</span>
                   </div>
                 </div>
-                <a href="/checkout" className="checkout-btn">
+                <Link to="/checkout" className="checkout-btn">
                   <span className="sans-font uppercase letter-spacing-wide">Proceed to Checkout</span>
                   <i className="fas fa-arrow-right"></i>
-                </a>
+                </Link>
 
                 <div className="secure-checkout">
                   <i className="fas fa-shield-alt"></i>

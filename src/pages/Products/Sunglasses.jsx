@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./product.css";
-import { useCart } from '../../context/CartContext'; // Import the context
+import { useCart } from '../../context/CartContext'; 
 
 const Sunglasses = () => {
-  // Use CartContext instead of local state
+
   const { 
     addToCart: contextAddToCart, 
     toggleWishlist: contextToggleWishlist, 
