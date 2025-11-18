@@ -1,16 +1,67 @@
-# React + Vite
+# **Serene Studio – Luxury Fashion Accessories Store**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Serene Studio is a modern and elegant ecommerce web application designed for exploring and purchasing premium fashion accessories.  
+Built with **React**, **Vite**, **Tailwind CSS**, and **React Router**, the project emphasizes a refined UI, smooth navigation, and a high-end shopping experience.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## **Features**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fully responsive luxury-themed interface  
+- Product listings with detailed descriptions  
+- Wishlist management  
+- Add-to-cart functionality  
+- Smooth and structured routing using React Router  
+- Clean, minimal, and scalable UI system  
+- Organized folder structure suitable for expansion  
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## **Tech Stack**
+
+- **React**  
+- **Vite**  
+- **CSS**
+- **Javascript**
+- **React Router**
+
+
+
+## **Installation**
+
+### **1. Clone the repository**
+
+```bash
+git clone https://github.com/your-username/serene-studio.git
+
+2. Navigate into the project directory
+cd serene-studio
+
+3. Install dependencies
+npm install
+
+4. Start the development server
+npm run dev
+```
+## **Project Structure**
+```bash
+src/
+│── components/
+│── pages/
+│── context/
+│── assets/
+│── styles/
+│── App.jsx
+│── main.jsx
+│── router/
+```
+
+## **How It Works**
+- Routing is controlled through React Router.
+- Styling is built with Tailwind CSS and supplemental custom CSS.
+- Wishlist and cart operations use React state and context.
+- Product data can be served locally or through an external API/JSON source.
+
+## **License**
+
+This project is open-source and available under the MIT License.
