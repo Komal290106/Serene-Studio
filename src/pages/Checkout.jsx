@@ -7,73 +7,82 @@ const Checkout = () => {
   const { isLoggedIn, currentUser } = useAuth();
   const navigate = useNavigate();
 
+  // Toasts
+  const [showLoginToast, setShowLoginToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+
+  // Form
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState(currentUser?.email || "");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postal, setPostal] = useState("");
+  const [country, setCountry] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
-  const [promoApplied, setPromoApplied] = useState(false);
+  const [cardNumber, setCardNumber] = useState("");
+
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
-  // Check login status and show toast only once
-  useEffect(() => {
-    // Small delay to ensure AuthContext has loaded
-    const checkAuth = setTimeout(() => {
-      if (!isLoggedIn) {
-        setShowToast(true);
-        const hideToast = setTimeout(() => setShowToast(false), 3000);
-        return () => clearTimeout(hideToast);
-      }
-    }, 100);
-
-    return () => clearTimeout(checkAuth);
-  }, []); // Only run once on mount
-
-  // Navbar scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector(".navbar");
-      if (navbar) {
-        navbar.classList.toggle("scrolled", window.scrollY > 50);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handlePaymentChange = (method) => setPaymentMethod(method);
-
-  const handleApplyPromo = () => {
-    if (!promoApplied) {
-      setPromoApplied(true);
-      setTimeout(() => setPromoApplied(false), 2000);
-    }
+  const isFormValid = () => {
+    return (
+      firstName.trim() &&
+      lastName.trim() &&
+      email.trim() &&
+      address.trim() &&
+      city.trim() &&
+      postal.trim() &&
+      country.trim() &&
+      (paymentMethod !== "card" || cardNumber.trim())
+    );
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setTimeout(() => {
+        setShowLoginToast(true);
+        setTimeout(() => setShowLoginToast(false), 3000);
+      }, 200);
+    }
+  }, [isLoggedIn]);
 
   const handleCheckout = () => {
     if (!isLoggedIn) {
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+      setShowLoginToast(true);
+      setTimeout(() => setShowLoginToast(false), 3000);
+      return;
+    }
+
+    if (!isFormValid()) {
+      setShowErrorToast(true);
+      setTimeout(() => setShowErrorToast(false), 3000);
       return;
     }
 
     setIsProcessing(true);
+
     setTimeout(() => {
-      alert("Thank you for your purchase! Your order has been placed.");
+      setShowSuccessToast(true);
+
+      setTimeout(() => {
+        setShowSuccessToast(false);
+        navigate("/orders");
+      }, 2000);
+
       setIsProcessing(false);
-      navigate("/orders");
     }, 1500);
   };
 
-  const handleLoginRedirect = () => {
-    navigate("/login");
-  };
+  const handleLoginRedirect = () => navigate("/login");
 
   return (
     <div className="checkout-page">
-      {/* Toast Notification */}
-      {showToast && !isLoggedIn && (
+      {/* LOGIN TOAST */}
+      {showLoginToast && !isLoggedIn && (
         <div className="checkout-login-toast">
           Please login to continue checkout
-          <button 
+          <button
             onClick={handleLoginRedirect}
             style={{
               marginLeft: "10px",
@@ -82,7 +91,7 @@ const Checkout = () => {
               border: "none",
               borderRadius: "4px",
               cursor: "pointer",
-              color: "#000"
+              color: "#000",
             }}
           >
             Login
@@ -90,8 +99,22 @@ const Checkout = () => {
         </div>
       )}
 
+      {/* ERROR TOAST */}
+      {showErrorToast && (
+        <div className="toast toast-error">
+          Please fill out all required fields.
+        </div>
+      )}
+
+      {/* SUCCESS TOAST */}
+      {showSuccessToast && (
+        <div className="toast toast-success">
+          Thank you! Your purchase is completed.
+        </div>
+      )}
+
       <div className="checkout-container">
-        {/* Progress */}
+        {/* PROGRESS BAR */}
         <div className="checkout-progress">
           <div className="progress-steps">
             <div className="step active">
@@ -111,13 +134,14 @@ const Checkout = () => {
               <span className="step-label">Payment</span>
             </div>
           </div>
+
           <div className="progress-bar">
             <div className="progress-fill" style={{ width: "50%" }}></div>
           </div>
         </div>
 
         <div className="checkout-content">
-          {/* Left Form */}
+          {/* LEFT SIDE */}
           <div className="checkout-form-section">
             <div className="form-card">
               <div className="card-header">
@@ -125,45 +149,45 @@ const Checkout = () => {
                 <div className="gold-divider"></div>
               </div>
 
-              <form id="checkoutForm">
+              <form>
                 <div className="form-row">
                   <div className="form-group">
                     <label>First Name</label>
                     <input
                       type="text"
-                      placeholder="Enter your first name"
-                      required
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       disabled={!isLoggedIn}
                     />
                   </div>
+
                   <div className="form-group">
                     <label>Last Name</label>
                     <input
                       type="text"
-                      placeholder="Enter your last name"
-                      required
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       disabled={!isLoggedIn}
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label>Email Address</label>
+                  <label>Email</label>
                   <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={isLoggedIn ? currentUser?.email || "" : ""}
-                    required
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     disabled={!isLoggedIn}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label>Shipping Address</label>
+                  <label>Address</label>
                   <input
                     type="text"
-                    placeholder="Street address"
-                    required
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     disabled={!isLoggedIn}
                   />
                 </div>
@@ -173,17 +197,18 @@ const Checkout = () => {
                     <label>City</label>
                     <input
                       type="text"
-                      placeholder="City"
-                      required
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
                       disabled={!isLoggedIn}
                     />
                   </div>
+
                   <div className="form-group">
                     <label>Postal Code</label>
                     <input
                       type="text"
-                      placeholder="Postal Code"
-                      required
+                      value={postal}
+                      onChange={(e) => setPostal(e.target.value)}
                       disabled={!isLoggedIn}
                     />
                   </div>
@@ -192,20 +217,24 @@ const Checkout = () => {
                 <div className="form-group">
                   <label>Country</label>
                   <div className="select-wrapper">
-                    <select required disabled={!isLoggedIn}>
+                    <select
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      disabled={!isLoggedIn}
+                    >
                       <option value="">Select Country</option>
-                      <option>United States</option>
-                      <option>United Kingdom</option>
-                      <option>Canada</option>
-                      <option>Australia</option>
                       <option>India</option>
+                      <option>United States</option>
+                      <option>Canada</option>
+                      <option>United Kingdom</option>
+                      <option>Australia</option>
                     </select>
                   </div>
                 </div>
               </form>
             </div>
 
-            {/* Payment */}
+            {/* PAYMENT METHOD */}
             <div className="form-card">
               <div className="card-header">
                 <h2>Payment Method</h2>
@@ -213,7 +242,6 @@ const Checkout = () => {
               </div>
 
               <div className="payment-options">
-                {/* CARD */}
                 <div
                   className={`payment-option ${
                     paymentMethod === "card" ? "active" : ""
@@ -221,14 +249,12 @@ const Checkout = () => {
                 >
                   <input
                     type="radio"
-                    id="cardPayment"
-                    disabled={!isLoggedIn}
                     checked={paymentMethod === "card"}
-                    onChange={() => handlePaymentChange("card")}
+                    onChange={() => setPaymentMethod("card")}
                   />
 
-                  <label htmlFor="cardPayment">
-                    <span className="payment-icon">💳</span> Credit/Debit Card
+                  <label>
+                    💳 Credit/Debit Card
                   </label>
 
                   {paymentMethod === "card" && (
@@ -237,40 +263,35 @@ const Checkout = () => {
                         <label>Card Number</label>
                         <input
                           type="text"
+                          value={cardNumber}
+                          onChange={(e) => setCardNumber(e.target.value)}
                           disabled={!isLoggedIn}
-                          placeholder="1234 5678 9012 3456"
                         />
                       </div>
                     </div>
                   )}
                 </div>
 
-                {/* PayPal */}
                 <div className="payment-option">
                   <input
                     type="radio"
-                    name="payment"
-                    id="paypalPayment"
-                    disabled={!isLoggedIn}
+                    onChange={() => setPaymentMethod("paypal")}
                   />
-                  <label htmlFor="paypalPayment">PayPal</label>
+                  <label>PayPal</label>
                 </div>
 
-                {/* Apple Pay */}
                 <div className="payment-option">
                   <input
                     type="radio"
-                    name="payment"
-                    id="applePayPayment"
-                    disabled={!isLoggedIn}
+                    onChange={() => setPaymentMethod("apple")}
                   />
-                  <label htmlFor="applePayPayment">Apple Pay</label>
+                  <label>Apple Pay</label>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Summary */}
+          {/* RIGHT SIDE */}
           <div className="order-summary-section">
             <div className="summary-card">
               <div className="card-header">
@@ -287,20 +308,14 @@ const Checkout = () => {
 
               <button
                 className={`checkout-btn ${isProcessing ? "processing" : ""}`}
-                disabled={!isLoggedIn || isProcessing}
+                disabled={!isLoggedIn || isProcessing || !isFormValid()}
                 onClick={handleCheckout}
               >
-                {isLoggedIn
-                  ? isProcessing
-                    ? "Processing..."
-                    : "Complete Purchase"
-                  : "Login Required"}
+                {isProcessing ? "Processing..." : "Complete Purchase"}
               </button>
 
               {!isLoggedIn && (
-                <p className="secure-checkout">
-                  Login to complete your purchase 🔒
-                </p>
+                <p className="secure-checkout">Login to complete your purchase 🔒</p>
               )}
             </div>
           </div>
